@@ -1,0 +1,108 @@
+<section class="masthead">
+  <div class="issue">
+    <span>EDIÇÃO 01 / NOVEMBRO 2026</span><span>UM POUCO DE CURIOSIDADE TODOS OS DIAS</span>
+  </div>
+  <h1>
+    Ideias para um<br /><em>amanhã mais humano.</em
+    ><span class="asterisk" aria-hidden="true">✳</span>
+  </h1>
+  <div class="lede">
+    <span class="pill">DESIGN · TECNOLOGIA · CULTURA</span>
+    <p>
+      Histórias para olhar o cotidiano de outro jeito.<br />Explore possibilidades. Encontre a sua
+      próxima pergunta.
+    </p>
+  </div>
+</section>
+<section class="discover" aria-labelledby="discover-title">
+  <div class="section-title">
+    <h2 id="discover-title">Encontre sua próxima leitura</h2>
+    <span>{{ reading.ids().length }} favoritos nesta sessão</span>
+  </div>
+  <div class="controls">
+    <div class="tabs" aria-label="Filtrar por categoria">
+      @for (item of categories; track item) {
+        <button
+          type="button"
+          [attr.aria-pressed]="category() === item"
+          (click)="category.set(item)"
+        >
+          {{ item }}
+        </button>
+      }
+    </div>
+    <label class="search"
+      ><span class="sr-only">Buscar histórias por título, assunto ou autor</span
+      ><input
+        type="search"
+        placeholder="Buscar uma ideia…"
+        [ngModel]="query()"
+        (ngModelChange)="query.set($event)"
+      /><span aria-hidden="true">⌕</span></label
+    ><button
+      class="favorites"
+      type="button"
+      [attr.aria-pressed]="savedOnly()"
+      (click)="toggleSavedOnly()"
+    >
+      Meus favoritos {{ savedOnly() ? '✓' : '+' }}
+    </button>
+  </div>
+</section>
+@if (!browsing()) {
+  <section class="highlights" aria-labelledby="highlights-title">
+    <h2 class="sr-only" id="highlights-title">Destaques da edição</h2>
+    <aurora-story-card [article]="featured" [featured]="true" />
+    <aside>
+      <p class="eyebrow">NO NOSSO RADAR</p>
+      @for (story of secondary; track story.id) {
+        <aurora-story-card [article]="story" />
+      }
+    </aside>
+  </section>
+}
+<section class="collection" aria-labelledby="collection-title">
+  <div class="collection-heading">
+    <h2 id="collection-title">{{ browsing() ? 'Sua seleção' : 'Continue explorando' }}</h2>
+    <p aria-live="polite">
+      {{ results().length }}
+      {{ results().length === 1 ? 'história encontrada' : 'histórias encontradas' }}
+    </p>
+  </div>
+  <div class="grid">
+    @for (story of results(); track story.id) {
+      <aurora-story-card [article]="story" />
+    } @empty {
+      <div class="empty">
+        <span aria-hidden="true">✳</span>
+        <h3>
+          {{
+            savedOnly()
+              ? 'Um espaço para suas próximas leituras.'
+              : 'Toda descoberta começa com outra pergunta.'
+          }}
+        </h3>
+        <p>
+          {{
+            savedOnly()
+              ? 'Salve histórias nos cartões e encontre suas favoritas aqui.'
+              : 'Tente outra palavra ou explore todas as categorias.'
+          }}
+        </p>
+        <button type="button" (click)="reset()">Explorar todas as histórias ↗</button>
+      </div>
+    }
+  </div>
+</section>
+<section class="editor-note">
+  <span aria-hidden="true">a.</span>
+  <div>
+    <p class="eyebrow">UMA NOTA DA REDAÇÃO</p>
+    <h2>O futuro também é feito<br />de pequenas pausas.</h2>
+    <p>
+      Aurora é uma revista imaginária sobre possibilidades reais. Todos os textos são originais de
+      demonstração, criados para este projeto de estudo.
+    </p>
+  </div>
+  <a href="#topo">Voltar ao começo ↑</a>
+</section>

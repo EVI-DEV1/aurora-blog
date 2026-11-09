@@ -1,0 +1,91 @@
+:host {
+  display: block;
+}
+article {
+  height: 100%;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 25px;
+}
+.cover {
+  display: block;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 3px;
+}
+.body {
+  padding-top: 20px;
+}
+.meta,
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  align-items: center;
+}
+.meta {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.meta span:first-child {
+  color: var(--rust);
+  font-weight: 700;
+}
+h2 {
+  font-family: var(--serif);
+  font-size: 29px;
+  line-height: 1.18;
+  font-weight: 400;
+  margin: 14px 0;
+}
+h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+h2 a:hover {
+  color: var(--rust);
+}
+p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+.bottom {
+  color: var(--muted);
+}
+button {
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 30px;
+  padding: 7px 12px;
+}
+button[aria-pressed='true'] {
+  background: var(--green);
+  color: var(--cream);
+}
+:host.featured .cover {
+  height: 380px;
+}
+:host.featured h2 {
+  font-size: 48px;
+}
+:host.featured p {
+  font-size: 16px;
+  max-width: 560px;
+}
+@media (max-width: 700px) {
+  :host.featured .cover {
+    height: 280px;
+  }
+  :host.featured h2 {
+    font-size: 37px;
+  }
+  .cover {
+    height: 240px;
+  }
+}

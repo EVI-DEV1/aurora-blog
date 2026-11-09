@@ -1,0 +1,26 @@
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<div class="site-shell" id="topo">
+  <header class="site-header">
+    <a class="brand" routerLink="/" aria-label="Aurora, início"
+      >aurora<span aria-hidden="true">✳</span></a
+    >
+    <nav aria-label="Navegação principal">
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+        >A edição</a
+      ><a routerLink="/sobre" routerLinkActive="active" ariaCurrentWhenActive="page"
+        >Sobre a Aurora</a
+      >
+    </nav>
+    <span class="header-note">UM NOVO OLHAR.<br />TODOS OS DIAS.</span>
+  </header>
+  <main id="conteudo" tabindex="-1"><router-outlet /></main>
+  <footer>
+    <a class="brand" routerLink="/">aurora<span aria-hidden="true">✳</span></a>
+    <p>Uma revista imaginária.<br />Infinitas possibilidades de aprender.</p>
+    <span>PROJETO DE ESTUDO / ANGULAR<br />TEXTOS E AUTORES FICTÍCIOS · 2026</span>
+  </footer>
+</div>

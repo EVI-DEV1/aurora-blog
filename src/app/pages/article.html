@@ -1,0 +1,57 @@
+<a class="back" routerLink="/">← Voltar à edição</a>
+@if (article(); as story) {
+  <article>
+    <header class="article-heading">
+      <span class="category">{{ story.category }} / VISÕES POSSÍVEIS</span>
+      <h1>{{ story.title }}</h1>
+      <p class="excerpt">{{ story.excerpt }}</p>
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">{{ story.author.charAt(0) }}</div>
+        <div>
+          <b>{{ story.author }}</b
+          ><span
+            ><time [attr.datetime]="story.date">{{
+              story.date.split('-').reverse().join('/')
+            }}</time>
+            · {{ story.minutes }} min de leitura</span
+          >
+        </div>
+        <button
+          type="button"
+          [attr.aria-pressed]="reading.has(story.id)"
+          (click)="reading.toggle(story.id)"
+        >
+          {{ reading.has(story.id) ? 'Nos seus favoritos ✓' : 'Salvar para ler +' }}
+        </button>
+      </div>
+    </header>
+    <div class="article-cover"><aurora-art [theme]="story.art" /></div>
+    <div class="prose">
+      <p class="disclaimer">ENSAIO ORIGINAL DE DEMONSTRAÇÃO · REVISTA IMAGINÁRIA</p>
+      @for (paragraph of story.paragraphs; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+      <div class="closing">
+        <span aria-hidden="true">✳</span>
+        <p>Continue curioso.<br />Uma boa história abre espaço para outra.</p>
+      </div>
+    </div>
+  </article>
+  <section class="related" aria-labelledby="related-title">
+    <h2 id="related-title">Na mesma sintonia</h2>
+    @for (item of related(); track item.id) {
+      <a [routerLink]="['/artigo', item.id]"
+        ><span>{{ item.category }}</span>
+        <h3>{{ item.title }}</h3>
+        <b aria-hidden="true">↗</b></a
+      >
+    }
+  </section>
+} @else {
+  <section class="missing">
+    <span aria-hidden="true">404 /</span>
+    <h1>Esta história ainda<br />não foi escrita.</h1>
+    <p>O endereço não corresponde a um artigo desta edição.</p>
+    <a routerLink="/">Encontrar outra leitura ↗</a>
+  </section>
+}

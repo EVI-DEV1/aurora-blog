@@ -1,0 +1,32 @@
+<article>
+  <a
+    class="cover"
+    [routerLink]="['/artigo', article().id]"
+    [attr.aria-label]="'Ler: ' + article().title"
+    ><aurora-art [theme]="article().art"
+  /></a>
+  <div class="body">
+    <div class="meta">
+      <span>{{ article().category }}</span
+      ><span>{{ article().minutes }} min de leitura</span>
+    </div>
+    <h2>
+      <a [routerLink]="['/artigo', article().id]">{{ article().title }}</a>
+    </h2>
+    <p>{{ article().excerpt }}</p>
+    <div class="bottom">
+      <span>{{ article().author }}</span
+      ><button
+        type="button"
+        [attr.aria-pressed]="reading.has(article().id)"
+        [attr.aria-label]="
+          (reading.has(article().id) ? 'Remover dos favoritos: ' : 'Salvar para ler: ') +
+          article().title
+        "
+        (click)="reading.toggle(article().id)"
+      >
+        {{ reading.has(article().id) ? 'Salvo ✓' : 'Salvar +' }}
+      </button>
+    </div>
+  </div>
+</article>
